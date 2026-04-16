@@ -5,3 +5,5 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.tools import tool
 
 @before_agent
+def before_agent_fn(input):
+    print("before_agent:", input)
