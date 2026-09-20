@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Attention Is All You Need",
+    "authors": "Vaswani et al.",
+    "venue": "NeurIPS 2017",
+    "summary": "提出了Transformer架构。"
+  },
+  {
+    "title": "Task-free Adaptive Meta Black-box Optimization",
+    "authors": "待补充",
+    "venue": "OpenReview",
+    "url": "https://openreview.net/forum?id=AufVSUgMUo",
+    "category": "优化",
+    "type": "论文",
+    "keywords": [
+      "Meta Black-box Optimization",
+      "Evolutionary Algorithms"
+    ],
+    "researchBackground": "传统手工设计的优化器在处理复杂黑箱优化任务时效率低下，现有方法对任务分布的先验依赖限制了实际应用。",
+    "problem": "提出一种无需先验任务分布的自适应元黑箱优化模型，通过在线参数调整解决任务分布未知的问题。",
+    "analysis": "视觉化研究显示，参数化的进化操作符合统计显著的搜索模式，例如自然选择和基因重组。",
+    "method": "设计闭环自适应参数学习机制，通过优化过程中生成的数据持续更新参数化进化操作，支持零样本快速优化。",
+    "experiment": "在合成黑箱优化基准和真实无人机路径规划问题上验证模型，表现出与现有方法有竞争力的性能。",
+    "contribution": "提出零样本优化的元黑箱优化框架，消除了对手工任务训练的依赖，推动应用范围扩展。",
+    "summary": "提出一种无需先验任务分布的自适应元黑箱优化框架。"
+  }
+]

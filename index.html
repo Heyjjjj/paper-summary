@@ -1,1 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>论文分类阅读库</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root{--blue:#0878d1;--ink:#24313d;--muted:#71808e;--line:#e2e8ee;--paper:#fff;--bg:#f4f7f9;--yellow:#e3b300}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei",Arial,sans-serif}header{padding:18px 20px 16px;background:#fff;border-bottom:1px solid var(--line)}header h1{margin:0 0 6px;color:var(--blue);font-size:23px}header p{margin:0;color:var(--muted);font-size:13px}.layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:24px;max-width:1400px;margin:0 auto;padding:18px 20px}aside{align-self:start;position:sticky;top:0;height:calc(100vh - 34px);overflow:auto;padding:0 0 22px;background:transparent}aside h2{margin:0 0 14px;font-size:18px}#search{width:100%;padding:11px 12px;border:1px solid #ccd6df;border-radius:7px;font-size:14px;background:#fff}#stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0 18px}.stat{padding:11px 10px;background:#f0f4f7;border-radius:7px}.stat strong{display:block;color:var(--blue);font-size:16px}.stat span{color:var(--muted);font-size:12px}.side-label{margin:14px 0 7px;color:#5d6e7b;font-weight:700;font-size:13px}.category-list{display:grid;gap:3px}.category{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:6px;color:#42515d;font-size:13px;cursor:pointer}.category:hover,.category.active{background:#e8f2f9;color:var(--blue)}.category b{font-size:11px;color:#83909b}main{min-width:0}.section-title{display:flex;align-items:baseline;gap:8px;margin:3px 0 12px;color:#1d2c38;font-size:20px}.section-title span{font-size:13px;color:var(--muted);font-weight:400}.paper-list{display:grid;gap:16px}.paper-card{padding:18px 20px 16px;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:8px;box-shadow:0 2px 6px #193b5609}.paper-card.original{border-left-color:var(--yellow)}.paper-head{display:flex;gap:10px;align-items:flex-start}.paper-head h3{margin:0;flex:1;font-size:17px;line-height:1.45}.badge{display:inline-block;padding:3px 9px;border:1px solid #e4c45c;border-radius:12px;background:#fff8da;color:#856100;font-size:12px;white-space:nowrap}.tags{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 14px}.tag{padding:4px 8px;border-radius:12px;background:#edf5fa;color:#657481;font-size:11px}.tag:first-child{background:#e5f3ff;color:var(--blue)}.paper-info{display:grid;grid-template-columns:92px 1fr;gap:9px 10px;margin:0;font-size:13px;line-height:1.65}.paper-info dt{color:var(--blue);font-weight:700}.paper-info dd{margin:0;color:#46535d}.abstract{margin:13px 0 0;padding-top:10px;border-top:1px dashed var(--line);color:var(--blue);font-size:12px;cursor:pointer}.empty{color:var(--muted);text-align:center;padding:35px 10px}.error{color:#b04a4a}@media(max-width:760px){.layout{grid-template-columns:1fr;padding:12px}.layout aside{position:static;height:auto}.category-list{grid-template-columns:repeat(2,minmax(0,1fr))}main{padding:0}.paper-card{padding:15px}.paper-head{display:block}.badge{margin-bottom:8px}}
+  </style>
+</head>
 
+<body>
+  <header><h1>📚 论文分类阅读库</h1><p id="subtitle">按研究方向整理与浏览论文</p></header>
+  <div class="layout">
+    <aside><h2>论文分类</h2><input id="search" type="search" placeholder="搜索标题、关键词或内容…"><div id="stats"></div><div class="side-label">按研究方向浏览</div><div id="categories" class="category-list"></div></aside>
+    <main><section id="paperList" class="paper-list"><p class="empty">正在加载论文…</p></section></main>
+  </div>
+
+<script>
+  const fallback=[{title:'Attention Is All You Need',authors:'Vaswani et al.',venue:'NeurIPS 2017',summary:'提出了Transformer架构，完全基于注意力机制，取代了RNN。'}];
+  const list=document.getElementById('paperList'),categories=document.getElementById('categories'),stats=document.getElementById('stats'),search=document.getElementById('search');let papers=[],activeCategory='全部';
+  const safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const values=v=>Array.isArray(v)?v.filter(Boolean):v?[v]:[];
+  const categoryOf=p=>values(p.categories||p.category)[0]||'其他';
+  const keywordsOf=p=>values(p.keywords||p.tags);
+  const fields=[['researchBackground','研究动机'],['problem','解决问题'],['analysis','现象分析'],['method','主要方法'],['experiment','数据与实验'],['contribution','主要贡献']];
+  function textFor(p,key){return p[key]||p[({researchBackground:'background',problem:'researchQuestion',analysis:'phenomenon',method:'approach',experiment:'experiments',contribution:'contributions'})[key]]||'';}
+  function renderCategories(){const counts=papers.reduce((m,p)=>(m[categoryOf(p)]=(m[categoryOf(p)]||0)+1,m),{});categories.innerHTML=['全部',...Object.keys(counts).sort()].map(c=>`<div class="category ${c===activeCategory?'active':''}" data-category="${safe(c)}"><span>${safe(c)}</span><b>${c==='全部'?papers.length:counts[c]}</b></div>`).join('');categories.querySelectorAll('.category').forEach(el=>el.onclick=()=>{activeCategory=el.dataset.category;render();renderCategories();});}
+  function render(q=''){q=q.toLowerCase().trim();const found=papers.filter(p=>(activeCategory==='全部'||categoryOf(p)===activeCategory)&&[p.title,p.authors,p.venue,p.summary,categoryOf(p),...keywordsOf(p),...fields.map(([key])=>textFor(p,key))].join(' ').toLowerCase().includes(q));list.innerHTML=found.length?`<h2 class="section-title">${safe(activeCategory)} <span>${found.length} 篇</span></h2>${found.map(card).join('')}`:'<p class="empty">没有找到相关论文</p>';}
+  function card(p){const type=p.type||p.kind||'论文';const keywords=keywordsOf(p);const info=fields.map(([key,label])=>{const text=textFor(p,key);return text?`<dt>${label}</dt><dd>${safe(text)}</dd>`:''}).join('');return `<article class="paper-card ${type==='原刊'?'original':''}"><div class="paper-head"><span class="badge">🔎 ${safe(type)}</span><h3>${safe(p.title)}</h3></div><div class="tags">${keywords.map(k=>`<span class="tag">${safe(k)}</span>`).join('')}</div><dl class="paper-info">${info||`<dt>论文简介</dt><dd>${safe(p.summary||'暂无简介')}</dd>`}</dl>${p.abstract?'<div class="abstract">→ 查看完整摘要 (Abstract)</div>':''}</article>`;}
+  function updateStats(){const count=new Set(papers.map(categoryOf)).size;stats.innerHTML=`<div class="stat"><strong>${papers.length}</strong><span>论文总数</span></div><div class="stat"><strong>${count}</strong><span>大类</span></div>`;}
+  search.oninput=()=>render(search.value);fetch('paper.json').then(r=>r.ok?r.json():Promise.reject()).catch(()=>fallback).then(data=>{papers=Array.isArray(data)?data:[];updateStats();renderCategories();render();});
+</script>
+</body>
+</html>
