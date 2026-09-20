@@ -1,15 +1,7 @@
 [
   {
-    "title": "Attention Is All You Need",
-    "authors": "Vaswani et al.",
-    "venue": "NeurIPS 2017",
-    "summary": "提出了Transformer架构。"
-  },
-  {
     "title": "Task-free Adaptive Meta Black-box Optimization",
-    "authors": "待补充",
-    "venue": "OpenReview",
-    "url": "https://openreview.net/forum?id=AufVSUgMUo",
+    "venue": "ICLR 2026",
     "category": "优化",
     "type": "论文",
     "keywords": [
@@ -22,6 +14,151 @@
     "method": "设计闭环自适应参数学习机制，通过优化过程中生成的数据持续更新参数化进化操作，支持零样本快速优化。",
     "experiment": "在合成黑箱优化基准和真实无人机路径规划问题上验证模型，表现出与现有方法有竞争力的性能。",
     "contribution": "提出零样本优化的元黑箱优化框架，消除了对手工任务训练的依赖，推动应用范围扩展。",
-    "summary": "提出一种无需先验任务分布的自适应元黑箱优化框架。"
+    "summary": "提出一种无需先验任务分布的自适应元黑箱优化框架。",
+    "supplement":"123"
+  },
+  {
+    "title": "COT-EVO: Evolutionary Distillation of Chain-of-Thought for Scientific Reasoning",
+    "authors": "Kehua Feng, Keyan Ding, Zhihui Zhu, Lei Liang, Qiang Zhang, Huajun Chen",
+    "venue": "ICLR 2026",
+    "category": "科学推理",
+    "type": "论文",
+    "keywords": [
+      "Chain-of-Thought Distillation",
+      "Scientific Reasoning",
+      "Evolutionary Optimization"
+    ],
+    "researchBackground": "通用领域的思维链蒸馏已经取得成效，但在科学领域中，即使是先进大模型也可能因任务复杂和知识专业性强而产生错误或浅层推理。",
+    "problem": "直接蒸馏质量不稳定的教师模型输出，会产生低质量训练数据并限制小型学生模型的科学推理能力。",
+    "analysis": "单教师蒸馏容易引入偏差，多教师方法虽然增加了推理路径多样性，却缺乏对思维链内部逻辑进行细粒度改进的能力。",
+    "method": "构建来自多个大模型思考者的多样化推理轨迹池，自动补充领域知识，并通过新颖性驱动选择、反思式重组和变异迭代改进思维链。",
+    "experiment": "将进化后的高质量思维链数据用于训练紧凑模型，并在科学推理基准上取得了先进性能。",
+    "contribution": "提出一种能够从多样且不完美的大模型中合成高保真科学推理数据的可扩展进化蒸馏框架。",
+    "summary": "提出 COT-EVO，通过进化式思维链蒸馏提升小模型的科学推理能力。",
+    "supplement":"123"
+  },
+  {
+    "title": "GEPA: Reflective Prompt Evolution Can Outperform Reinforcement Learning",
+    "authors": "Lakshya A. Agrawal, Shangyin Tan, Dilara Soylu, Noah Ziems, Rishi Khare, Krista Opsahl-Ong, Arnav Singhvi, Herumb Shandilya, Michael J. Ryan, Meng Jiang, Christopher Potts, Koushik Sen, Alexandros G. Dimakis, Ion Stoica, Dan Klein, Matei Zaharia, Omar Khattab",
+    "venue": "ICLR 2026",
+    "category": "提示词优化",
+    "type": "论文",
+    "keywords": [
+      "Prompt Optimization",
+      "Natural Language Reflection",
+      "Genetic-Pareto"
+    ],
+    "researchBackground": "强化学习通常需要大量轨迹和稀疏标量奖励来优化大语言模型，而自然语言具有可解释性，可能提供更丰富的学习媒介。",
+    "problem": "传统强化学习提示优化需要大量 rollout，学习效率和可解释性受到限制，难以快速从少量试错中提取高层规则。",
+    "analysis": "提示词优化器可以直接利用推理过程、工具调用和工具输出进行自然语言反思，从失败轨迹中诊断问题并总结可迁移经验。",
+    "method": "提出 GEPA（Genetic-Pareto），通过自然语言反思诊断轨迹、提出和测试提示词更新，并组合自身尝试中 Pareto 前沿上的互补经验。",
+    "experiment": "在六项任务上，GEPA 平均比 GRPO 高 6 个百分点，最多减少 35 倍 rollout，并比 MIPROv2 高出超过 10 个百分点。",
+    "contribution": "证明基于自然语言反思的提示词进化可以在更少试验次数下超过强化学习，并展示了其作为代码推理时搜索策略的潜力。",
+    "summary": "提出 GEPA，通过自然语言反思和 Pareto 经验组合高效进化大语言模型提示词。",
+    "supplement":"123"
+  },
+  {
+    "title": "HELIX: Evolutionary Reinforcement Learning for Open-Ended Scientific Problem Solving",
+    "authors": "Chang Su, Zhongkai Hao, Zhizhou Zhang, Zeyu Xia, Youjia Wu, Hang Su, Jun Zhu",
+    "venue": "ICLR 2026",
+    "category": "科学推理",
+    "type": "论文",
+    "keywords": [
+      "Evolutionary Reinforcement Learning",
+      "Scientific Problem Solving",
+      "In-context Learning"
+    ],
+    "researchBackground": "复杂科学问题具有领域专一、开放式和无界等特点，需要在广阔且灵活的解空间中探索，现有学习方法和人工设计流程的探索效率及泛化能力有限。",
+    "problem": "如何让大语言模型在开放式科学问题中利用经验适应任务，同时兼顾候选解的质量与多样性。",
+    "analysis": "单一或固定流程难以覆盖开放式任务的巨大解空间，缺少多样候选解会限制探索，而缺少迭代策略优化又会限制解的质量提升。",
+    "method": "提出 HELIX，通过上下文学习维护多样且高质量的候选解池，并结合强化学习进行迭代策略改进，协同提升探索范围和解质量。",
+    "experiment": "在圆打包任务上仅使用 14B 模型取得半径和 2.63598308 的先进结果，并在 Adult 与 Bank Marketing 基准上平均提升 F1 5.95 分，超过 GPT-4o。",
+    "contribution": "提出分层进化强化学习框架，将候选解进化、上下文经验和策略优化结合用于开放式科学问题求解。",
+    "summary": "提出 HELIX，通过候选解进化和强化学习提升大模型解决开放式科学问题的能力。",
+    "supplement":"123123"
+  },
+  {
+    "title": "Discovering Novel LLM Experts via Task-Capability Coevolution",
+    "authors": "Andrew Dai, Boris Meinardus, Ciaran Regan, Yingtao Tian, Yujin Tang",
+    "venue": "ICLR 2026",
+    "category": "LLM优化",
+    "type": "论文",
+    "keywords": [
+      "LLM Coevolution",
+      "Model Merging",
+      "Synthetic Task Generation",
+      "Capability Discovery"
+    ],
+    "researchBackground": "现有大语言模型开发依赖静态数据集、奖励函数和反复启动的训练流程，持续扩展能力通常需要更大的模型或更多数据，成本较高。",
+    "problem": "如何在一次持续运行中同时推动任务和模型开放式演化，从基础模型中发现具有新颖且多样能力的 LLM 专家。",
+    "analysis": "传统流程通常一次只产生一个模型，难以持续积累和扩展能力多样性，也难以在不进行明确基准优化的情况下发现新的专业能力。",
+    "method": "提出 AC/DC 框架，通过模型合并进化 LLM，通过合成数据生成进化自然语言任务，并让任务与模型共同演化。",
+    "experiment": "AC/DC 构建了不断增长的 LLM 专家档案，其模型在更少 GPU 内存下超过更大模型，并在下游基准上获得更广泛的能力覆盖，覆盖度还会随时间提升。",
+    "contribution": "将任务能力协同进化引入 LLM 发现，展示了利用现有模型作为进化阶梯、持续扩展模型能力多样性的开发范式。",
+    "summary": "提出 AC/DC，通过任务与模型协同进化发现具有新颖能力的 LLM 专家。",
+    "supplement":"任务模型协同进化，模型合并，合成任务生成"
+  },
+  {
+    "title": "TRINITY: An Evolved LLM Coordinator",
+    "authors": "Jinglue Xu, Qi Sun, Peter Schwendeman, Stefan Nielsen, Edoardo Cetin, Yujin Tang",
+    "venue": "ICLR 2026",
+    "category": "LLM优化",
+    "type": "论文",
+    "keywords": [
+      "LLM Coordination",
+      "Evolutionary Strategy",
+      "Model Composition",
+      "Multi-agent Collaboration"
+    ],
+    "researchBackground": "模型权重合并受到架构不匹配和闭源 API 的限制，而直接扩大模型规模成本高昂，因此需要一种不修改模型权重的多模型协同方式。",
+    "problem": "如何利用轻量级协调器理解输入上下文，并在多个大语言模型之间进行高效、动态的任务分配。",
+    "analysis": "紧凑语言模型的隐藏状态包含丰富的上下文信息，可用于判断不同查询应交给哪个模型处理；在高维且预算严格的场景中，进化策略可能比强化学习更适合优化协调器。",
+    "method": "提出 TRINITY，由约 0.6B 参数的紧凑语言模型和约 10K 参数的轻量级头组成，通过进化策略优化多轮协作，并为选定模型分配 Thinker、Worker 或 Verifier 角色。",
+    "experiment": "在编码、数学、推理和领域知识等任务上，TRINITY 持续超过单模型及现有方法，并在 LiveCodeBench 上取得 86.2% 的新纪录，对分布外任务也具有较强泛化能力。",
+    "contribution": "提出一种低成本的测试时模型组合协调器，证明小型协调模型结合可分离协方差矩阵自适应进化策略能够有效调度多个 LLM。",
+    "summary": "提出 TRINITY，用轻量级进化协调器动态组合多个大语言模型。",
+    "supplement":"学习少量参数的轻量级协调器，利用进化策略优化多模型协作。"
+  },
+  {
+    "title": "Boosting Multi-Domain Reasoning of LLMs via Curvature-Guided Policy Optimization",
+    "authors": "Xize Liang, Lin Yang, Jie Wang, Rui Liu, Yang Lu, Jinliang Zeng, Hanzhu Chen, Dong Li, Jianye Hao",
+    "venue": "ICLR 2026",
+    "category": "LLM优化",
+    "type": "论文",
+    "keywords": [
+      "Multi-domain Reasoning",
+      "Reinforcement Learning",
+      "Curvature-guided Optimization",
+      "Policy Optimization"
+    ],
+    "researchBackground": "大语言模型的多域强化学习具有复杂奖励曲面，不同领域之间还存在能力冲突，在一个领域上的收益可能以另一个领域的退化为代价。",
+    "problem": "如何在不承担 Hessian 计算高成本的情况下缓解跨领域冲突，并找到能够同时提升多个领域性能的策略参数。",
+    "analysis": "不同领域的奖励信号和数据分布共同形成复杂优化几何，直接进行策略更新难以处理跨领域梯度冲突和能力权衡。",
+    "method": "提出曲率引导策略优化 CGPO，借鉴 Newton 方法，在随机领域顺序下利用其他领域的曲率信息预处理当前梯度，促进跨领域交互和隐式梯度对齐。",
+    "experiment": "在涵盖数学、编码、科学和创意写作的混合数据集上进行训练，并在七个常用基准上评估，CGPO 在奖励提升速度和多域能力方面显著超过所有基线。",
+    "contribution": "提出一种利用奖励曲面几何结构的可扩展多域策略优化框架，在避免显式 Hessian 计算的同时提升多域推理能力。",
+    "summary": "提出 CGPO，利用跨领域曲率信息缓解策略优化中的能力冲突。",
+    "supplement":"多领域强化学习，曲率引导策略优化"
+  },
+  {
+    "title": "EvoTest: Evolutionary Test-Time Learning for Self-Improving Agentic Systems",
+    "authors": "Yufei He, Juncheng Liu, Yue Liu, Yibo Li, Tri Cao, Zhiyuan Hu, Xinxing Xu, Bryan Hooi",
+    "venue": "ICLR 2026",
+    "category": "LLM优化",
+    "type": "论文",
+    "keywords": [
+      "Test-Time Learning",
+      "Self-Improving Agents",
+      "Evolutionary Optimization",
+      "Agentic Systems"
+    ],
+    "researchBackground": "当前 AI 智能体通常在部署时具有固定策略，面对新环境时难以在测试过程中学习复杂技能，限制了其动态任务中的实用性。",
+    "problem": "如何系统评估并推动智能体在连续测试回合中根据经验即时改进，同时避免微调和梯度更新。",
+    "analysis": "反思、记忆和强化学习等现有适应方法在 J-TTL 测试中表现受限，固定配置也无法充分利用前一回合的成功与失败经验。",
+    "method": "提出 EvoTest 框架和 Jericho Test-Time Learning 基准，由 Actor Agent 执行游戏、Evolver Agent 分析回合记录，并进化提示词、记忆、超参数和工具使用流程。",
+    "experiment": "在 J-TTL 基准上，EvoTest 持续提升性能并超过反思、仅记忆和在线微调基线，是唯一能够赢得 Detective 和 Library 两个游戏的方法。",
+    "contribution": "提出面向智能体系统的无微调、无梯度进化测试时学习框架，并建立用于衡量连续回合即时学习能力的基准。",
+    "summary": "提出 EvoTest，通过进化整个智能体系统实现无梯度的测试时自我改进。",
+    "supplement":"时间序列学习，行动-进化循环"
   }
 ]

@@ -23,7 +23,7 @@
   const values=v=>Array.isArray(v)?v.filter(Boolean):v?[v]:[];
   const categoryOf=p=>values(p.categories||p.category)[0]||'其他';
   const keywordsOf=p=>values(p.keywords||p.tags);
-  const fields=[['researchBackground','研究动机'],['problem','解决问题'],['analysis','现象分析'],['method','主要方法'],['experiment','数据与实验'],['contribution','主要贡献']];
+  const fields=[['venue','出处'],['researchBackground','研究动机'],['problem','解决问题'],['analysis','现象分析'],['method','主要方法'],['experiment','数据与实验'],['contribution','主要贡献']];
   function textFor(p,key){return p[key]||p[({researchBackground:'background',problem:'researchQuestion',analysis:'phenomenon',method:'approach',experiment:'experiments',contribution:'contributions'})[key]]||'';}
   function renderCategories(){const counts=papers.reduce((m,p)=>(m[categoryOf(p)]=(m[categoryOf(p)]||0)+1,m),{});categories.innerHTML=['全部',...Object.keys(counts).sort()].map(c=>`<div class="category ${c===activeCategory?'active':''}" data-category="${safe(c)}"><span>${safe(c)}</span><b>${c==='全部'?papers.length:counts[c]}</b></div>`).join('');categories.querySelectorAll('.category').forEach(el=>el.onclick=()=>{activeCategory=el.dataset.category;render();renderCategories();});}
   function render(q=''){q=q.toLowerCase().trim();const found=papers.filter(p=>(activeCategory==='全部'||categoryOf(p)===activeCategory)&&[p.title,p.authors,p.venue,p.summary,categoryOf(p),...keywordsOf(p),...fields.map(([key])=>textFor(p,key))].join(' ').toLowerCase().includes(q));list.innerHTML=found.length?`<h2 class="section-title">${safe(activeCategory)} <span>${found.length} 篇</span></h2>${found.map(card).join('')}`:'<p class="empty">没有找到相关论文</p>';}
